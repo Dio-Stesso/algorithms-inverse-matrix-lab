@@ -1,0 +1,3 @@
+C:/Users/alexa/CLionProjects/algorithms-inverse-matrix-lab/cmake-build-debug/CMakeFiles/algorithms_inverse_matrix_lab.dir
+C:/Users/alexa/CLionProjects/algorithms-inverse-matrix-lab/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/alexa/CLionProjects/algorithms-inverse-matrix-lab/cmake-build-debug/CMakeFiles/rebuild_cache.dir
