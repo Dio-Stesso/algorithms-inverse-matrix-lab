@@ -7,3 +7,5 @@
 1	150	6883459027031304	build.ninja	c87575d742a66a3c
 4	686	6883459034416401	CMakeFiles/algorithms_inverse_matrix_lab.dir/src/matrix/Strassen/main.cpp.obj	e1f6087dc7def588
 689	803	6883459035573295	algorithms_inverse_matrix_lab.exe	656fabf8cd843f40
+3	681	6883462966177403	CMakeFiles/algorithms_inverse_matrix_lab.dir/src/matrix/Strassen/main.cpp.obj	e1f6087dc7def588
+681	796	6883462967314360	algorithms_inverse_matrix_lab.exe	656fabf8cd843f40
