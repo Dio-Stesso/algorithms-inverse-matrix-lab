@@ -3,5 +3,3 @@
 ## Contributors:
 - ### Oleksandr Tsilynko (Dio-Stesso)
 - ### Yulia Petryk (yuliapetryk)
-- ### Liuba Prikhodko
-- ### Daria Tretiak

@@ -1,2 +1,2 @@
-/bin
-/db
+cmake-build-debug
+CMakeLists.txt
