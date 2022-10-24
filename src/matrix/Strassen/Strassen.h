@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <iostream>
-#include "../basic_functions.h"
+#include "Basic_functions.h"
 using namespace std;
 
 void split(Matrix& a, Matrix& a1, Matrix& a2, Matrix& a3, Matrix& a4)

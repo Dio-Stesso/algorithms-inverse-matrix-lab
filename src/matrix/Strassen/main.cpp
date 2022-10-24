@@ -1,4 +1,6 @@
-#include "../basic_functions.h"
+#include <vector>
+#include <iostream>
+#include "Basic_functions.h"
 #include "Strassen.h"
 
 using namespace std;
