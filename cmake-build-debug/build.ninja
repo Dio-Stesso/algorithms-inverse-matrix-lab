@@ -49,11 +49,11 @@ cmake_ninja_workdir = C$:/Users/alexa/CLionProjects/algorithms-inverse-matrix-la
 
 build cmake_object_order_depends_target_algorithms_inverse_matrix_lab: phony || CMakeFiles/algorithms_inverse_matrix_lab.dir
 
-build CMakeFiles/algorithms_inverse_matrix_lab.dir/src/main.cpp.obj: CXX_COMPILER__algorithms_inverse_matrix_lab_Debug C$:/Users/alexa/CLionProjects/algorithms-inverse-matrix-lab/src/main.cpp || cmake_object_order_depends_target_algorithms_inverse_matrix_lab
-  DEP_FILE = CMakeFiles\algorithms_inverse_matrix_lab.dir\src\main.cpp.obj.d
+build CMakeFiles/algorithms_inverse_matrix_lab.dir/src/matrix/Strassen/main.cpp.obj: CXX_COMPILER__algorithms_inverse_matrix_lab_Debug C$:/Users/alexa/CLionProjects/algorithms-inverse-matrix-lab/src/matrix/Strassen/main.cpp || cmake_object_order_depends_target_algorithms_inverse_matrix_lab
+  DEP_FILE = CMakeFiles\algorithms_inverse_matrix_lab.dir\src\matrix\Strassen\main.cpp.obj.d
   FLAGS = -g -std=gnu++14
   OBJECT_DIR = CMakeFiles\algorithms_inverse_matrix_lab.dir
-  OBJECT_FILE_DIR = CMakeFiles\algorithms_inverse_matrix_lab.dir\src
+  OBJECT_FILE_DIR = CMakeFiles\algorithms_inverse_matrix_lab.dir\src\matrix\Strassen
 
 
 # =============================================================================
@@ -63,7 +63,7 @@ build CMakeFiles/algorithms_inverse_matrix_lab.dir/src/main.cpp.obj: CXX_COMPILE
 #############################################
 # Link the executable algorithms_inverse_matrix_lab.exe
 
-build algorithms_inverse_matrix_lab.exe: CXX_EXECUTABLE_LINKER__algorithms_inverse_matrix_lab_Debug CMakeFiles/algorithms_inverse_matrix_lab.dir/src/main.cpp.obj
+build algorithms_inverse_matrix_lab.exe: CXX_EXECUTABLE_LINKER__algorithms_inverse_matrix_lab_Debug CMakeFiles/algorithms_inverse_matrix_lab.dir/src/matrix/Strassen/main.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\algorithms_inverse_matrix_lab.dir

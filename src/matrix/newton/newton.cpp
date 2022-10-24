@@ -1,9 +1,9 @@
+#pragma once
+
 #include <iostream>
 #include <cfloat>
 #include "newton.hpp"
-#include "matrix.cpp"
-
-bool isSquare(const Matrix &matrix);
+#include "../Strassen/Strassen.h"
 
 using namespace std;
 
@@ -16,10 +16,18 @@ Matrix inverse(const Matrix A, double epsilon) {
     Matrix I = getUnitMatrix(A.size());
     Matrix E;
     do {
-        E = subtractMatrices(I, multiplyMatrix(B, A));
-        B = multiplyMatrix(addMatrix(I, E), B);
+        E = I - Strassen_multiplication(B, A);
+        B = Strassen_multiplication(I + E, B);
     } while (getAverageSum(E) > epsilon);
     return B;
+}
+
+bool isSquare(const Matrix &matrix) {
+    int n = matrix.size();
+    for (size_t i = 0; i < n; i++) {
+        if (matrix[i].size() != n) return false;
+    }
+    return true;
 }
 
 bool isValid(const Matrix &A) {
@@ -29,14 +37,6 @@ bool isValid(const Matrix &A) {
     } else if (!isSquare(A)) {
         cout << "Matrix A is not a square matrix.\n";
         return false;
-    }
-    return true;
-}
-
-bool isSquare(const Matrix &matrix) {
-    int n = matrix.size();
-    for (size_t i = 0; i < n; i++) {
-        if (matrix[i].size() != n) return false;
     }
     return true;
 }
@@ -62,7 +62,7 @@ double getAverageSum(const Matrix &E) {
 }
 
 Matrix getUnitMatrix(int n) {
-    Matrix I = Matrix(n, vector<double>(n, double()));
+    Matrix I = Matrix(n, vector<float>(n, double()));
     for (size_t i = 0; i < n; i++) {
         I[i][i] = 1;
     }

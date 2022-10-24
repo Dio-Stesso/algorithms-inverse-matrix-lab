@@ -1,6 +1,5 @@
 #include <vector>
-
-using Matrix = std::vector<std::vector<double>>;
+#include "../basic_functions.h"
 
 Matrix inverse(Matrix A, double epsilon);
 

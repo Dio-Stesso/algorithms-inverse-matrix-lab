@@ -3,4 +3,4 @@ project(algorithms_inverse_matrix_lab)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(algorithms_inverse_matrix_lab src/main.cpp)
+add_executable(algorithms_inverse_matrix_lab  src/matrix/Strassen/main.cpp)
