@@ -79,15 +79,14 @@ Matrix Strassen_multiplication(Matrix first, Matrix second) {
 	size_t new_size = max(max(first_rows, first_columns), second_columns); // first_columns=second_rows
 	new_size = degrees_two(new_size);
 
-	//розширюємо матриці до потрібного розміру 
+	
 	if (first.size() != new_size || first[0].size() != new_size) {
 		expand(first, new_size);
 		expand(second, new_size);
 	}
-	//множимо матриці
+
 	Matrix result = Strassens_algorithm(first, second, new_size);
 
-	// звужуємо матрицю до початкових розмірів її твірних матриць 
 	if (first_rows != new_size) {
 		result.resize(first_rows);
 	}
