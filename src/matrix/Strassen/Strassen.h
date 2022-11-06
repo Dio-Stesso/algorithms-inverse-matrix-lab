@@ -5,34 +5,32 @@
 #include "../basic_functions.h"
 using namespace std;
 
-void split(Matrix& a, Matrix& a1, Matrix& a2, Matrix& a3, Matrix& a4)
+void Real_valued:: split(Real_valued& a1, Real_valued &a2, Real_valued& a3, Real_valued &a4)
+{   
+	size_t n = this->Matrix.size() /2;
+	for (size_t i = 0; i < n; ++i) {		
+		a1.Matrix[i].resize(n);
+		a2.Matrix[i].resize(n);
+		a3.Matrix[i].resize(n);
+		a4.Matrix[i].resize(n);
+
+		copy(begin(this->Matrix[i]), begin(this->Matrix[i]) + n, begin(a1.Matrix[i]));
+		copy(begin(this->Matrix[i]) + n, end(this->Matrix[i]), begin(a2.Matrix[i]));
+		copy(begin(this->Matrix[i + n]), begin(this->Matrix[i + n]) + n, begin(a3.Matrix[i]));
+		copy(begin(this->Matrix[i + n]) + n, end(this->Matrix[i + n]), begin(a4.Matrix[i]));
+	}
+}
+
+void Real_valued:: collect(Real_valued& c11, Real_valued& c12, Real_valued& c21, Real_valued& c22)
 {
-	size_t n = a.size() / 2;
+	size_t n = this->Matrix.size() / 2;
 	for (size_t i = 0; i < n; ++i) {
-		a1[i].resize(n);
-		a2[i].resize(n);
-		a3[i].resize(n);
-		a4[i].resize(n);
-
-		copy(begin(a[i]), begin(a[i]) + n, begin(a1[i]));
-		copy(begin(a[i]) + n, end(a[i]), begin(a2[i]));
-		copy(begin(a[i + n]), begin(a[i + n]) + n, begin(a3[i]));
-		copy(begin(a[i + n]) + n, end(a[i + n]), begin(a4[i]));
-
-	}
+		copy(begin(c11.Matrix[i]), end(c11.Matrix[i]), begin(this->Matrix[i]));
+		copy(begin(c12.Matrix[i]), end(c12.Matrix[i]), begin(this->Matrix[i]) + n);
+		copy(begin(c21.Matrix[i]), end(c21.Matrix[i]), begin(this->Matrix[i + n]));
+		copy(begin(c22.Matrix[i]), end(c22.Matrix[i]), begin(this->Matrix[i + n]) + n);
+	}	
 }
-
-Matrix collect(Matrix& c11, Matrix& c12, Matrix& c21, Matrix& c22)
-{
-	for (int i = 0; i < c11.size(); i++)
-	{
-		c11[i].insert(c11[i].end(), c12[i].begin(), c12[i].end());
-		c21[i].insert(c21[i].end(), c22[i].begin(), c22[i].end());
-	}
-	c11.insert(c11.end(), c21.begin(), c21.end());
-	return c11;
-}
-
 
 size_t degrees_two(const size_t& number) {
 	size_t d_two = 2;
@@ -40,63 +38,54 @@ size_t degrees_two(const size_t& number) {
 	return d_two;
 }
 
-Matrix Strassens_algorithm(Matrix first, Matrix second, size_t n)
+Real_valued Real_valued:: Strassens_algorithm (Real_valued matrix, size_t n)
 {
-	if (n == 2) {
-		return (first * second);
+	if (n <= 2) {
+		return (this->multiplication(matrix));
 	}
 	n = n / 2;
-	Matrix a11(n), a12(n), a21(n), a22(n);
-	Matrix b11(n), b12(n), b21(n), b22(n);
-	split(first, a11, a12, a21, a22);
-	split(second, b11, b12, b21, b22);
+	Real_valued a11(n), a12(n), a21(n), a22(n);
+	Real_valued b11(n), b12(n), b21(n), b22(n);
+	this->split(a11, a12, a21, a22);
+	matrix.split( b11, b12, b21, b22);
+	Real_valued p1 = (a11.addition(a22)).Strassens_algorithm(b11.addition(b22), n);
+	Real_valued p2 = (a21.addition(a22)).Strassens_algorithm( b11, n);
+	Real_valued p3 = a11.Strassens_algorithm( b22.subtraction(b12), n);
+	Real_valued p4 = a22.Strassens_algorithm( (b11.subtraction (b21)), n);
+	Real_valued p5 = (a11.addition(a12)).Strassens_algorithm( b22, n);
+	Real_valued p6 = (a11.subtraction(a21)).Strassens_algorithm( b11.addition( b12), n);
+	Real_valued p7 = (a22.subtraction(a12)).Strassens_algorithm(b21.addition( b22), n);
 
-	Matrix p1 = Strassens_algorithm((a11 + a22), (b11 + b22), n);
-	Matrix p2 = Strassens_algorithm((a21 + a22), b11, n);
-	Matrix p3 = Strassens_algorithm(a11, (b12 - b22), n);
-	Matrix p4 = Strassens_algorithm(a22, (b21 - b11), n);
-	Matrix p5 = Strassens_algorithm((a11 + a12), b22, n);
-	Matrix p6 = Strassens_algorithm((a21 - a11), (b11 + b12), n);
-	Matrix p7 = Strassens_algorithm((a12 - a22), (b21 + b22), n);
-
-	Matrix c11 = ((p1 + p4) + (p7 - p5));
-	Matrix c12 = (p3 + p5);
-	Matrix c21 = (p2 + p4);
-	Matrix c22 = ((p1 - p2) + (p3 + p6));
-
-	Matrix result(2 * n);
-	result = collect(c11, c12, c21, c22);
-
+	Real_valued c11 = (p1.addition( p4)).addition(p5.subtraction( p7));
+	Real_valued c12 = p3.addition( p5);
+	Real_valued c21 = p2.addition( p4);
+	Real_valued c22 = (p2.subtraction(p1)).addition(p3.addition( p6));
+	Real_valued result(2*n);
+	result.collect(c11, c12, c21, c22);
 	return result;
 }
 
-Matrix Strassen_multiplication(Matrix first, Matrix second) {
-	if (!correct_size_for_multiplication(first, second)) {
-		throw std::runtime_error("");
+Real_valued Real_valued:: Strassen_multiplication(Real_valued matrix) {
+	if (!(this->correct_size_for_multiplication(matrix))) {
+		throw runtime_error("");
 	}
-
-	size_t first_rows = first.size(), first_columns = first[0].size(), second_rows = second.size(), second_columns = second[0].size();
+	if (this->rows == 1) {
+		return (this->multiplication(matrix));
+	}
+	size_t first_rows = this->rows, first_columns = this->columns, second_rows = matrix.rows, second_columns = matrix.columns;
 	size_t new_size = max(max(first_rows, first_columns), second_columns); // first_columns=second_rows
 	new_size = degrees_two(new_size);
 
-	//���������� ������� �� ��������� ������ 
-	if (first.size() != new_size || first[0].size() != new_size) {
-		expand(first, new_size);
-		expand(second, new_size);
+	if (this->rows != new_size || this->columns != new_size) {
+		this->expand(new_size);
+		matrix.expand( new_size);
 	}
-	//������� �������
-	Matrix result = Strassens_algorithm(first, second, new_size);
-
-	// ������� ������� �� ���������� ������ �� ������ ������� 
+	Real_valued result = this->Strassens_algorithm(matrix, new_size);
 	if (first_rows != new_size) {
-		result.resize(first_rows);
+		result.Matrix.resize(first_rows);
 	}
 	if (second_columns != new_size) {
-		for (auto& r : result) { r.resize(second_columns); }
+		for (auto& r : result.Matrix) { r.resize(second_columns); }
 	}
-
 	return result;
 }
-
-
-
