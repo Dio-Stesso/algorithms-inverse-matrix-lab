@@ -40,7 +40,7 @@ size_t degrees_two(const size_t& number) {
 
 Real_valued Real_valued:: Strassens_algorithm (Real_valued matrix, size_t n)
 {
-	if (n <= 2) {
+	if (n <= 64) {
 		return (this->multiplication(matrix));
 	}
 	n = n / 2;
@@ -69,7 +69,7 @@ Real_valued Real_valued:: Strassen_multiplication(Real_valued matrix) {
 	if (!(this->correct_size_for_multiplication(matrix))) {
 		throw runtime_error("");
 	}
-	if (this->rows == 1) {
+	if (this->rows <=64) {
 		return (this->multiplication(matrix));
 	}
 	size_t first_rows = this->rows, first_columns = this->columns, second_rows = matrix.rows, second_columns = matrix.columns;
