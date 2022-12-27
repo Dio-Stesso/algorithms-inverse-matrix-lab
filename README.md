@@ -3,3 +3,4 @@
 ## Contributors:
 - ### Oleksandr Tsilynko (Dio-Stesso)
 - ### Yulia Petryk (yuliapetryk)
+- ### Liubov Prikhodko (liuubaanyya)
